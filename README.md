@@ -9,9 +9,15 @@ This project is a simple console-based calculator written in Java. It performs b
 This project is ideal for beginners learning Java, especially concepts like user input, conditional statements, and basic arithmetic logic.
 
 🛠 Features
+
 Addition (+)
+
 Subtraction (-)
+
 Multiplication (*)
+
 Division (/)
+
 Handles division by zero
+
 User-friendly console input
