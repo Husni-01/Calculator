@@ -5,7 +5,7 @@ import java.util.Scanner; // Import Scanner class to take user input
  It performs basic arithmetic operations:
  addition, subtraction, multiplication, and division.
 */
-public class Calculator {
+public class calculator {
 
     public static void main(String[] args) {
 
@@ -63,7 +63,7 @@ public class Calculator {
                 return; // Exit the program
         }
 
-        // Display the final result
+        // Display the final result to the user
         System.out.println("Result: " + result);
 
         // Close the Scanner to free resources
