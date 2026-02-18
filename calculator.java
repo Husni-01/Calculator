@@ -1,72 +1,98 @@
-import java.util.Scanner; // Import Scanner class to take user input
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-/*
- This program is a simple Java calculator.
- It performs basic arithmetic operations:
- addition, subtraction, multiplication, and division.
-*/
-public class calculator {
+public class CalculatorUI extends JFrame implements ActionListener {
+
+    private JTextField num1Field, num2Field;
+    private JLabel resultLabel;
+
+    public CalculatorUI() {
+
+        // Set window title
+        setTitle("Simple Calculator");
+        setSize(350, 250);
+        setLocationRelativeTo(null); // Center on screen
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Set layout
+        setLayout(new GridLayout(5, 2, 10, 10));
+
+        // Create components
+        JLabel num1Label = new JLabel("Enter first number:");
+        num1Field = new JTextField();
+
+        JLabel num2Label = new JLabel("Enter second number:");
+        num2Field = new JTextField();
+
+        JButton addButton = new JButton("+");
+        JButton subButton = new JButton("-");
+        JButton mulButton = new JButton("*");
+        JButton divButton = new JButton("/");
+
+        resultLabel = new JLabel("Result: ");
+
+        // Add action listeners
+        addButton.addActionListener(this);
+        subButton.addActionListener(this);
+        mulButton.addActionListener(this);
+        divButton.addActionListener(this);
+
+        // Add components to frame
+        add(num1Label);
+        add(num1Field);
+
+        add(num2Label);
+        add(num2Field);
+
+        add(addButton);
+        add(subButton);
+
+        add(mulButton);
+        add(divButton);
+
+        add(resultLabel);
+
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        try {
+            double num1 = Double.parseDouble(num1Field.getText());
+            double num2 = Double.parseDouble(num2Field.getText());
+            double result = 0;
+
+            String command = e.getActionCommand();
+
+            switch (command) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    if (num2 == 0) {
+                        resultLabel.setText("Error: Division by zero!");
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+            }
+
+            resultLabel.setText("Result: " + result);
+
+        } catch (NumberFormatException ex) {
+            resultLabel.setText("Invalid input! Enter numbers only.");
+        }
+    }
 
     public static void main(String[] args) {
-
-        // Create a Scanner object to read input from the user
-        Scanner sc = new Scanner(System.in);
-
-        // Ask the user for the first number
-        System.out.print("Enter first number: ");
-        double num1 = sc.nextDouble(); // Store first number
-
-        // Ask the user for the second number
-        System.out.print("Enter second number: ");
-        double num2 = sc.nextDouble(); // Store second number
-
-        // Ask the user to choose an arithmetic operation
-        System.out.print("Choose operation (+, -, *, /): ");
-        char operator = sc.next().charAt(0); // Read the operator 
-
-        // Variable to store the result of the calculation
-        double result;
-
-        /*
-         Use switch-case to perform
-         the selected arithmetic operation
-        */
-        switch (operator) {
-            case '+':
-                // Addition opertion
-                result = num1 + num2;
-                break;
-
-            case '-':
-                // Subtraction operation
-                result = num1 - num2;
-                break;
-
-            case '*':
-                // Multiplication operation
-                result = num1 * num2;
-                break;
-
-            case '/':
-                // Check for division by zero
-                if (num2 == 0) {
-                    System.out.println("Error: Division by zero is not allowed."); // Give error to user
-                    return; // Exit the program
-                }
-                // Division
-                result = num1 / num2;
-                break;
-
-            default:
-                // If operator is invalid
-                System.out.println("Invalid operator!");
-                return; // Exit the program
-        }
-
-        // Display the final result to the user
-        System.out.println("Result: " + result);
-
-        // Close the Scanner to free resources
-        sc.close();
+        new CalculatorUI();
     }
 }
